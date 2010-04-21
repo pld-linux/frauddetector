@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_without	tests		# don't build and run tests
+
 %define		svnrev	79
 %define		rel		0.2
 %include	/usr/lib/rpm/macros.java
@@ -48,6 +52,10 @@ EOF
 
 %build
 %ant
+
+%if %{with tests}
+%java -jar %{name}.jar test/conf.properties
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
