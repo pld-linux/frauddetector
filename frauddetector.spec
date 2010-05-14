@@ -20,6 +20,7 @@ Source0:	%{name}-%{svnrev}.tar.bz2
 URL:		http://courses.cs.ut.ee/2009/security-seminar/
 BuildRequires:	ant
 BuildRequires:	jdk
+BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.553
 BuildRequires:	sed >= 4.0
 Requires:	GeoIP-db-City
