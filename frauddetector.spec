@@ -2,8 +2,8 @@
 # Conditional build:
 %bcond_without	tests		# don't build and run tests
 
-%define		svnrev	79
-%define		rel		0.2
+%define		svnrev	86
+%define		rel		0.1
 %include	/usr/lib/rpm/macros.java
 Summary:	Log analyzer with based on GeoIP distance
 Name:		frauddetector
@@ -13,11 +13,12 @@ License:	Apache v2.0
 Group:		Development/Languages/Java
 # revno=
 # svn co http://frauddetector.googlecode.com/svn/trunk${revno:+@$revno} frauddetector
-# tar -cjf frauddetector-$(svnversion frauddetector).tar.bz2 --exclude=.svn --exclude=GeoLiteCity.dat frauddetector
+# tar -cjf frauddetector-$(svnversion frauddetector).tar.bz2 --exclude-vcs --exclude=GeoLiteCity.dat frauddetector
 # ../dropin frauddetector-$(svnversion frauddetector).tar.bz2
 Source0:	%{name}-%{svnrev}.tar.bz2
-# Source0-md5:	0bc4165092deacb904a66b381dc9f8c0
+# Source0-md5:	bc29a6add663ae977fde560175ccf306
 URL:		http://courses.cs.ut.ee/2009/security-seminar/
+%{?with_tests:BuildRequires:	GeoIP-db-City}
 BuildRequires:	ant
 BuildRequires:	jdk
 BuildRequires:	rpm-javaprov
@@ -55,6 +56,7 @@ EOF
 %ant
 
 %if %{with tests}
+ln -snf %{_datadir}/GeoIP/GeoLiteCity.dat geoIP
 %java -jar %{name}.jar test/conf.properties
 %endif
 
