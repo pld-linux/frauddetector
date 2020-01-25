@@ -4,7 +4,6 @@
 
 %define		svnrev	86
 %define		rel		0.1
-%include	/usr/lib/rpm/macros.java
 Summary:	Log analyzer with based on GeoIP distance
 Name:		frauddetector
 Version:	0.1
